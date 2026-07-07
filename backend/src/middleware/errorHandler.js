@@ -9,8 +9,11 @@ class ApiError extends Error {
 
 // Global error handler middleware
 const errorHandler = (err, req, res, next) => {
+  console.error(`[ERROR] ${req.method} ${req.originalUrl} - ${err.message}`);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
+
+
 
   // Development error response
   if (process.env.NODE_ENV === 'development') {
